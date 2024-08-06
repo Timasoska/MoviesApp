@@ -19,7 +19,6 @@ class MovieListRepositoryImpl @Inject constructor(private val api: MoviesApi) : 
             dataList
         } catch (e: Exception) {
             Log.i("Error", "Exception occurred: ${e.localizedMessage}", e)
-            //MovieViewState.Error("Error in catch")
             emptyList()
         }
     }

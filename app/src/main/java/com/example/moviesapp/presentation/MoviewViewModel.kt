@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.moviesapp.data.remote.MoviesApi
 import com.example.moviesapp.data.repository.MovieListRepositoryImpl
 import com.example.moviesapp.domain.repository.MovieListRepository
+import com.example.moviesapp.domain.useCase.GetMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MoviewViewModel @Inject constructor(
-    //private val api: MoviesApi
-    private val repository: MovieListRepository
+    private val getMoviesUseCase: GetMoviesUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf<MovieViewState>(MovieViewState.Loading)
     var state : State<MovieViewState> = _state
@@ -23,8 +23,7 @@ class MoviewViewModel @Inject constructor(
        when(intent){
            is MovieViewIntent.LoadNewMovie -> {
                viewModelScope.launch {
-                   //val movies = MovieListRepositoryImpl(api).getMovieList()
-                   val movies = repository.getMovieList()
+                   val movies = getMoviesUseCase()
                    _state.value = MovieViewState.Success(movies)
                }
            }
