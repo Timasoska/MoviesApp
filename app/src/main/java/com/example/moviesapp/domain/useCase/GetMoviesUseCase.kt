@@ -1,6 +1,7 @@
 package com.example.moviesapp.domain.useCase
 
 import com.example.moviesapp.domain.movies.Data
+import com.example.moviesapp.domain.movies.MoviesModel
 import com.example.moviesapp.domain.repository.MovieListRepository
 import javax.inject.Inject
 

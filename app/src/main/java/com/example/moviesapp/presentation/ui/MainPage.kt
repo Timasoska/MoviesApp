@@ -19,6 +19,7 @@ import com.example.moviesapp.presentation.MoviewViewModel
 @Composable
 fun MainPage(movieViewModel: MoviewViewModel){
     val state by movieViewModel.state
+
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(15.dp),
@@ -32,7 +33,8 @@ fun MainPage(movieViewModel: MoviewViewModel){
                 Text(text = "Error: $message")
             }
             is MovieViewState.Success -> {
-                val movie = (state as MovieViewState.Success).data
+                val movies = (state as MovieViewState.Success).data
+                MoviesGrid(movies = movies)
             }
         }
         Button(modifier = Modifier.padding(15.dp)
