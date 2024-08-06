@@ -1,4 +1,4 @@
-package com.example.moviesapp.domain.util
+package com.example.moviesapp.util
 
 object Constans {
     val BASE_URL = "https://moviesapi.ir/api/"

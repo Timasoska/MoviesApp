@@ -1,6 +1,6 @@
 package com.example.moviesapp.presentation
 
-import android.provider.ContactsContract.Data
+import com.example.moviesapp.domain.movies.Data
 
 sealed class MovieViewState {
     data class Success(val data: List<Data>): MovieViewState()

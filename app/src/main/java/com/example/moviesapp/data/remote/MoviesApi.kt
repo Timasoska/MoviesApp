@@ -10,7 +10,7 @@ interface MoviesApi{
 
     @GET("v1/movies")
     suspend fun getMoviesData(
-        @Query("page=%7Bpage%7D")page: Int
-    ): Response<List<MoviesModel>>
+        @Query("page")page: Int
+    ): Response<MoviesModel>
 
 }
