@@ -15,7 +15,7 @@ class MovieListRepositoryImpl @Inject constructor(private val api: MoviesApi) : 
             val moviesModel = response.body()
             val dataList = moviesModel?.data ?: emptyList()
             MovieViewState.Success(dataList)
-            Log.i("Response", ": ${moviesModel}")
+            Log.i("Response", ": $moviesModel")
             dataList
         } catch (e: Exception) {
             Log.i("Error", "Exception occurred: ${e.localizedMessage}", e)
