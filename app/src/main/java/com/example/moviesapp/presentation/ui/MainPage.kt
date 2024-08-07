@@ -1,7 +1,9 @@
 package com.example.moviesapp.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -20,11 +22,10 @@ import com.example.moviesapp.presentation.MoviewViewModel
 fun MainPage(movieViewModel: MoviewViewModel){
     val state by movieViewModel.state
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(15.dp),
-        Arrangement.Bottom,
-        Alignment.CenterHorizontally
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(15.dp)
     ){
         when(state){
             is MovieViewState.Loading -> CircularProgressIndicator()
@@ -37,11 +38,22 @@ fun MainPage(movieViewModel: MoviewViewModel){
                 MoviesGrid(movies = movies)
             }
         }
-        Button(modifier = Modifier.padding(15.dp)
-            ,onClick = {
-                movieViewModel.processIntent(MovieViewIntent.LoadNewMovie)
+        Row(
+            modifier = Modifier
+                .padding(15.dp)
+                .align(Alignment.BottomCenter),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Button(onClick = {
+                movieViewModel.processIntent(MovieViewIntent.PreviousPage)
             }) {
-            Text(text = "TEST")
+                Text(text = "<")
+            }
+            Button(onClick = {
+                movieViewModel.processIntent(MovieViewIntent.NextPage)
+            }) {
+                Text(text = ">")
+            }
         }
     }
 }

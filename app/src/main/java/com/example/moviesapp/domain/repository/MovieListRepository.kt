@@ -6,5 +6,5 @@ import com.example.moviesapp.domain.movies.MoviesModel
 
 interface MovieListRepository {
 
-    suspend fun getMovieList(): List<Data>
+    suspend fun getMovieList(page: Int): List<Data>
 }
