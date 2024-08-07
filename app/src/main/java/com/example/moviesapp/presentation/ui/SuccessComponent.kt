@@ -60,13 +60,13 @@ fun MovieCard(movie: Data){
                     .height(200.dp)
             ){
                 AsyncImage(
-                    model = movie.images,
+                    model = movie.poster,
                     contentDescription = "Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
                 Text(
-                    text = movie.imdb_rating.toString(),
+                    text = movie.imdb_rating,
                     color = Color.White,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
@@ -79,7 +79,7 @@ fun MovieCard(movie: Data){
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = movie.title.toString(),
+                text = movie.title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 maxLines = 1
