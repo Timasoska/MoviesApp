@@ -10,14 +10,12 @@ import javax.inject.Inject
 
 class MovieListRepositoryImpl @Inject constructor(private val api: MoviesApi) : MovieListRepository {
     override suspend fun getMovieList(page: Int): List<Data> {
-        MovieViewState.Loading
-        return try {
-            val response = api.getMoviesData(page)
-            val moviesModel = response.body()
-            moviesModel?.data ?: emptyList()
-        } catch (e: Exception) {
-            Log.i("Error", "Exception occurred: ${e.localizedMessage}", e)
-            emptyList()
+        val response = api.getMoviesData(page)
+        if(!response.isSuccessful) {
+            val errorBody = response.errorBody()?.toString()
+            Log.e("Response", "$errorBody")
+            throw Exception("Response $errorBody")
         }
+        return response.body()?.data ?: emptyList()
     }
 }

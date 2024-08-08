@@ -19,33 +19,31 @@ class MoviewViewModel @Inject constructor(
     private val _state = mutableStateOf<MovieViewState>(MovieViewState.Loading)
     var state : State<MovieViewState> = _state
 
-    private var currentPage = 1
-
     init {
         processIntent(MovieViewIntent.LoadNewMovie)
     }
 
     fun processIntent(intent: MovieViewIntent){
        when(intent){
-           is MovieViewIntent.LoadNewMovie -> loadMovies(currentPage)
+           is MovieViewIntent.LoadNewMovie -> loadMovies(1)
            is MovieViewIntent.NextPage -> {
-               currentPage += 1
-               loadMovies(currentPage)
+               val currentPage = (_state.value as MovieViewState.Success).currentPage ?: 1
+               loadMovies(currentPage + 1)
            }
            is MovieViewIntent.PreviousPage -> {
-               if (currentPage > 1) {
-                   currentPage -= 1
-                   loadMovies(currentPage)
-               }
+               val currentPage = (_state.value as MovieViewState.Success).currentPage ?: 1
+               if(currentPage > 1)
+                   loadMovies(currentPage - 1)
            }
        }
     }
+
     private fun loadMovies(page: Int) {
         viewModelScope.launch {
             _state.value = MovieViewState.Loading
             try {
                 val movies = getMoviesUseCase(page)
-                _state.value = MovieViewState.Success(movies)
+                _state.value = MovieViewState.Success(movies, page)
             } catch (e: Exception) {
                 _state.value = MovieViewState.Error(e.localizedMessage ?: "Unknown error")
             }

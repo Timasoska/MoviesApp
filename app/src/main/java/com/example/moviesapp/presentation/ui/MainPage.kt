@@ -28,7 +28,12 @@ fun MainPage(movieViewModel: MoviewViewModel){
             .padding(15.dp)
     ){
         when(state){
-            is MovieViewState.Loading -> CircularProgressIndicator()
+            is MovieViewState.Loading -> {
+                Column(modifier = Modifier.fillMaxSize(),
+                    Arrangement.Center,
+                    Alignment.CenterHorizontally)
+                {CircularProgressIndicator()}
+            }
             is MovieViewState.Error -> {
                 val message = (state as MovieViewState.Error).message
                 Text(text = "Error: $message")

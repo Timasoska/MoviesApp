@@ -4,7 +4,7 @@ import com.example.moviesapp.domain.movies.Data
 import com.example.moviesapp.domain.movies.MoviesModel
 
 sealed class MovieViewState {
-    data class Success(val data: List<Data>): MovieViewState()
+    data class Success(val data: List<Data>,val currentPage: Int): MovieViewState()
     object Loading: MovieViewState()
     data class Error(val message: String): MovieViewState()
 }
