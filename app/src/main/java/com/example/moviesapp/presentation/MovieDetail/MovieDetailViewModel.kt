@@ -26,6 +26,7 @@ class MovieDetailViewModel @Inject constructor(
     }
 
     private fun loadDetailMovie(movieId: Int){
+        Log.i("LoadDetailMovie", "Loading details for movieId: $movieId")
         viewModelScope.launch {
             _state.value = MovieDetailViewState.Loading
             try{
