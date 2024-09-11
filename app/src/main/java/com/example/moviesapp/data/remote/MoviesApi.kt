@@ -14,9 +14,9 @@ interface MoviesApi{
         @Query("page")page: Int
     ): Response<MoviesModel>
 
-    @GET("v1/movies/")
+    @GET("v1/movies")
     suspend fun getMovieDetail(
-        @Path("movieId") movieId: Int
+        @Query("movieId") movieId: Int
     ):Response<Data>
 
 }

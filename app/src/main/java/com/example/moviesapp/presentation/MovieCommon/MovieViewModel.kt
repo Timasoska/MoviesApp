@@ -23,7 +23,6 @@ class MovieViewModel @Inject constructor(
     fun processIntent(intent: MovieViewIntent){
        when(intent){
            is MovieViewIntent.LoadNewMovie -> loadMovies(1)
-           //is MovieViewIntent.LoadNewMovie -> loadMovies(0)
            is MovieViewIntent.NextPage -> {
                val currentPage = (_state.value as MovieViewState.Success).currentPage ?: 1
                loadMovies(currentPage + 1)

@@ -18,9 +18,10 @@ import androidx.navigation.NavController
 import com.example.moviesapp.presentation.MovieCommon.MovieViewIntent
 import com.example.moviesapp.presentation.MovieCommon.MovieViewState
 import com.example.moviesapp.presentation.MovieCommon.MovieViewModel
+import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
 
 @Composable
-fun MainPage(movieViewModel: MovieViewModel){
+fun MainPage(movieViewModel: MovieViewModel, movieDetailViewModel: MovieDetailViewModel){
     val state by movieViewModel.state
 
     Box(
@@ -41,7 +42,7 @@ fun MainPage(movieViewModel: MovieViewModel){
             }
             is MovieViewState.Success -> {
                 val movies = (state as MovieViewState.Success).data
-                MoviesGrid(movies = movies)
+                MoviesGrid(movies = movies,movieDetailViewModel)
             }
         }
         Row(

@@ -1,6 +1,7 @@
 package com.example.moviesapp.presentation.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -14,8 +15,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,21 +31,11 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.moviesapp.data.movies.Data
 import com.example.moviesapp.data.movies.MoviesModel
+import com.example.moviesapp.presentation.MovieCommon.MovieViewState
+import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewIntent
+import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
+import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewState
 
-@Composable
-fun SuccessComponent(movies: List<Data>){
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        contentPadding = PaddingValues(8.dp),
-        modifier = Modifier.fillMaxSize()
-    ) {
-        items(movies.size){index ->
-            MovieCard(movie = movies[index], onClick = {
-
-            })
-        }
-    }
-}
 
 @Composable
 fun MovieCard(movie: Data, onClick: () -> Unit){
@@ -100,7 +93,21 @@ fun MovieCard(movie: Data, onClick: () -> Unit){
 }
 
 @Composable
-fun MoviesGrid(movies: List<Data>){
+fun MoviesGrid(movies: List<Data>, movieDetailViewModel: MovieDetailViewModel){
+    val state by movieDetailViewModel.state
+    when(state){
+        is MovieDetailViewState.Loading -> {
+            CircularProgressIndicator()
+        }
+        is MovieDetailViewState.Error -> {
+            val message = (state as MovieDetailViewState.Error).message
+            Text(text = "Error: $message")
+        }
+        is MovieDetailViewState.Success -> {
+            val movie = (state as MovieDetailViewState.Success).data
+
+        }
+    }
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
@@ -109,10 +116,12 @@ fun MoviesGrid(movies: List<Data>){
         items(movies.size){index ->
             MovieCard(
                 movie = movies[index],
-                // Навигация на экран с деталями фильма
+                // Передача ID фильма в ViewModel
                 onClick = {
-
-                })
+                    val movieId = movies[index].id
+                    movieDetailViewModel.processIntent(MovieDetailViewIntent.LoadMovie(movieId))
+                }
+            )
         }
     }
 }
