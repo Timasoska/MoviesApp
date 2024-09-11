@@ -14,12 +14,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.moviesapp.presentation.MovieViewIntent
-import com.example.moviesapp.presentation.MovieViewState
-import com.example.moviesapp.presentation.MoviewViewModel
+import androidx.navigation.NavController
+import com.example.moviesapp.presentation.MovieCommon.MovieViewIntent
+import com.example.moviesapp.presentation.MovieCommon.MovieViewState
+import com.example.moviesapp.presentation.MovieCommon.MovieViewModel
 
 @Composable
-fun MainPage(movieViewModel: MoviewViewModel){
+fun MainPage(movieViewModel: MovieViewModel){
     val state by movieViewModel.state
 
     Box(

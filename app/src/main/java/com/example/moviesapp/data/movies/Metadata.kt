@@ -1,4 +1,4 @@
-package com.example.moviesapp.domain.movies
+package com.example.moviesapp.data.movies
 
 data class Metadata(
     val current_page: String,

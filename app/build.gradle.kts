@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.coil)
     implementation (libs.androidx.lifecycle.viewmodel.compose)
+    //implementation (libs.androidx.navigation.compose)
+    implementation (libs.androidx.hilt.navigation.compose.v100)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

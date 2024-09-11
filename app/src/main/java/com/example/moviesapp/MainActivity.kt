@@ -8,18 +8,20 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.moviesapp.presentation.MoviewViewModel
+import androidx.navigation.compose.rememberNavController
+import com.example.moviesapp.presentation.MovieCommon.MovieViewModel
 import com.example.moviesapp.presentation.ui.MainPage
 import com.example.moviesapp.presentation.ui.theme.MoviesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: MoviewViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val navController = rememberNavController()
             MoviesAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MainPage(movieViewModel = viewModel)

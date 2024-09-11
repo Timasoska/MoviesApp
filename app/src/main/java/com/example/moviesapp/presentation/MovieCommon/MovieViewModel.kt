@@ -1,19 +1,16 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.MovieCommon
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviesapp.data.remote.MoviesApi
-import com.example.moviesapp.data.repository.MovieListRepositoryImpl
-import com.example.moviesapp.domain.repository.MovieListRepository
 import com.example.moviesapp.domain.useCase.GetMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviewViewModel @Inject constructor(
+class MovieViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf<MovieViewState>(MovieViewState.Loading)
@@ -26,6 +23,7 @@ class MoviewViewModel @Inject constructor(
     fun processIntent(intent: MovieViewIntent){
        when(intent){
            is MovieViewIntent.LoadNewMovie -> loadMovies(1)
+           //is MovieViewIntent.LoadNewMovie -> loadMovies(0)
            is MovieViewIntent.NextPage -> {
                val currentPage = (_state.value as MovieViewState.Success).currentPage ?: 1
                loadMovies(currentPage + 1)

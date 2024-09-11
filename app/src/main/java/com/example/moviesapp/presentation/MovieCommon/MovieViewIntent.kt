@@ -1,4 +1,4 @@
-package com.example.moviesapp.presentation
+package com.example.moviesapp.presentation.MovieCommon
 
 sealed class MovieViewIntent {
     object LoadNewMovie : MovieViewIntent()

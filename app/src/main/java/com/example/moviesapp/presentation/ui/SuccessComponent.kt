@@ -24,9 +24,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.example.moviesapp.domain.movies.Data
-import com.example.moviesapp.domain.movies.MoviesModel
+import com.example.moviesapp.data.movies.Data
+import com.example.moviesapp.data.movies.MoviesModel
 
 @Composable
 fun SuccessComponent(movies: List<Data>){
@@ -36,14 +37,17 @@ fun SuccessComponent(movies: List<Data>){
         modifier = Modifier.fillMaxSize()
     ) {
         items(movies.size){index ->
-            MovieCard(movie = movies[index])
+            MovieCard(movie = movies[index], onClick = {
+
+            })
         }
     }
 }
 
 @Composable
-fun MovieCard(movie: Data){
+fun MovieCard(movie: Data, onClick: () -> Unit){
     Card(
+        onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
@@ -103,7 +107,12 @@ fun MoviesGrid(movies: List<Data>){
         modifier = Modifier.fillMaxSize()
     ) {
         items(movies.size){index ->
-            MovieCard(movie = movies[index])
+            MovieCard(
+                movie = movies[index],
+                // Навигация на экран с деталями фильма
+                onClick = {
+
+                })
         }
     }
 }

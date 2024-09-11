@@ -1,7 +1,9 @@
 package com.example.moviesapp.di
 
 import com.example.moviesapp.data.remote.MoviesApi
+import com.example.moviesapp.data.repository.MovieDetailRepositoryImpl
 import com.example.moviesapp.data.repository.MovieListRepositoryImpl
+import com.example.moviesapp.domain.repository.MovieDetailRepository
 import com.example.moviesapp.domain.repository.MovieListRepository
 import com.example.moviesapp.util.Constans
 import dagger.Module
@@ -30,5 +32,11 @@ object AppModule{
     @Singleton
     fun provideMovieListRepository(api: MoviesApi): MovieListRepository {
         return MovieListRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailRepository(api: MoviesApi): MovieDetailRepository {
+        return MovieDetailRepositoryImpl(api)
     }
 }
