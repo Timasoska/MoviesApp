@@ -21,7 +21,7 @@ class MovieDetailViewModel @Inject constructor(
 
     fun processIntent(intent: MovieDetailViewIntent){
         when(intent){
-            is MovieDetailViewIntent.LoadMovie -> loadDetailMovie((_state.value as MovieDetailViewState.Success).movieID)
+            is MovieDetailViewIntent.LoadMovie -> loadDetailMovie(intent.movieId)
         }
     }
 
