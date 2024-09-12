@@ -20,8 +20,9 @@ import com.example.moviesapp.presentation.MovieCommon.MovieViewState
 import com.example.moviesapp.presentation.MovieCommon.MovieViewModel
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
 
+
 @Composable
-fun MainPage(movieViewModel: MovieViewModel, movieDetailViewModel: MovieDetailViewModel){
+fun MainPage(movieViewModel: MovieViewModel, navController: NavController, movieDetailViewModel: MovieDetailViewModel){
     val state by movieViewModel.state
 
     Box(
@@ -42,7 +43,7 @@ fun MainPage(movieViewModel: MovieViewModel, movieDetailViewModel: MovieDetailVi
             }
             is MovieViewState.Success -> {
                 val movies = (state as MovieViewState.Success).data
-                MoviesGrid(movies = movies,movieDetailViewModel)
+                MoviesGrid(movies = movies, navController = navController, movieDetailViewModel = movieDetailViewModel)
             }
         }
         Row(

@@ -1,6 +1,7 @@
 package com.example.moviesapp.presentation.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,11 +41,11 @@ import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewState
 @Composable
 fun MovieCard(movie: Data, onClick: () -> Unit){
     Card(
-        onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
             .width(150.dp)
+            .clickable { onClick() }
     ){
         Column(
             modifier = Modifier
@@ -93,35 +94,20 @@ fun MovieCard(movie: Data, onClick: () -> Unit){
 }
 
 @Composable
-fun MoviesGrid(movies: List<Data>, movieDetailViewModel: MovieDetailViewModel){
-    val state by movieDetailViewModel.state
-    when(state){
-        is MovieDetailViewState.Loading -> {
-            CircularProgressIndicator()
-        }
-        is MovieDetailViewState.Error -> {
-            val message = (state as MovieDetailViewState.Error).message
-            Text(text = "Error: $message")
-        }
-        is MovieDetailViewState.Success -> {
-            val movie = (state as MovieDetailViewState.Success).data
-
-        }
-    }
+fun MoviesGrid(movies: List<Data>, navController: NavController,movieDetailViewModel: MovieDetailViewModel, ){
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
         modifier = Modifier.fillMaxSize()
     ) {
         items(movies.size){index ->
-            MovieCard(
-                movie = movies[index],
-                // Передача ID фильма в ViewModel
-                onClick = {
-                    val movieId = movies[index].id
-                    movieDetailViewModel.processIntent(MovieDetailViewIntent.LoadMovie(movieId))
+            MovieCard(movie = movies[index], onClick = {
+                val movieId = movies[index].id
+                movieDetailViewModel.processIntent(MovieDetailViewIntent.LoadMovie(movieId))
+                navController.navigate("DetailScreen"){
+                    launchSingleTop = true // Позволяет избежать дублирования
                 }
-            )
+            })
         }
     }
 }

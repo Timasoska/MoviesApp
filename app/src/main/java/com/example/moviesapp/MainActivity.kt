@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.moviesapp.navigation.CustomNavHost
 import com.example.moviesapp.presentation.MovieCommon.MovieViewModel
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
 import com.example.moviesapp.presentation.ui.MainPage
@@ -25,7 +26,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MoviesAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainPage(movieViewModel = viewModel, movieDetailViewModel = detailViewModel)
+                    val navController = rememberNavController()
+                    CustomNavHost(navController = navController, movieViewModel = viewModel, movieDetailViewModel = detailViewModel)
+                    //MainPage(movieViewModel = viewModel, movieDetailViewModel = detailViewModel)
                 }
             }
         }
