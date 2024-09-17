@@ -1,15 +1,23 @@
 package com.example.moviesapp.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.moviesapp.data.movies.Data
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewIntent
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
@@ -39,11 +47,27 @@ fun DetailScreen(movieDetailViewModel: MovieDetailViewModel){
 @Composable
 fun DetailPage(movie: Data){
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(28.dp),
         Arrangement.Center,
         Alignment.CenterHorizontally
     ) {
-        Text(text = "Title: ${movie.title}")
-        // Отображайте здесь другие данные о фильме
+        Text(
+            text = movie.title,
+            color = Color.Black,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(8.dp)
+                .padding(4.dp)
+        )
+        AsyncImage(
+            model = movie.poster,
+            contentDescription = "Image",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxSize(),
+
+        )
     }
 }
