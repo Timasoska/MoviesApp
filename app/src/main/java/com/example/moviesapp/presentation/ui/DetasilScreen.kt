@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.moviesapp.data.movies.Data
-import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewIntent
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewModel
 import com.example.moviesapp.presentation.MovieDetail.MovieDetailViewState
 
@@ -80,7 +77,7 @@ fun DetailPage(movie: Data){
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = movie.title ?: "Movie Title",
+                text = movie.title,
                 color = Color.White,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
@@ -91,7 +88,7 @@ fun DetailPage(movie: Data){
                     .padding(8.dp)
             ) {
                 Text(
-                    text = movie.imdb_rating ?: "N/A",
+                    text = movie.imdb_rating,
                     color = Color.Yellow,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold
@@ -103,7 +100,7 @@ fun DetailPage(movie: Data){
 
         // Movie Genres
         Text(
-            text = movie.genres.joinToString(", ") ?: "Genres",
+            text = movie.genres.joinToString(", "),
             color = Color.Gray,
             fontSize = 14.sp,
         )
@@ -116,12 +113,12 @@ fun DetailPage(movie: Data){
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "Runtime: ${movie.runtime ?: "N/A"}",
+                text = "Runtime: ${movie.runtime}",
                 color = Color.LightGray,
                 fontSize = 14.sp
             )
             Text(
-                text = "Year: ${movie.year ?: "N/A"}",
+                text = "Year: ${movie.year}",
                 color = Color.LightGray,
                 fontSize = 14.sp
             )
@@ -131,7 +128,7 @@ fun DetailPage(movie: Data){
 
         // Movie Plot
         Text(
-            text = movie.plot ?: "Movie Plot",
+            text = movie.plot,
             color = Color.White,
             fontSize = 16.sp,
             lineHeight = 24.sp
@@ -141,12 +138,12 @@ fun DetailPage(movie: Data){
 
         // Movie Director, Actors
         Text(
-            text = "Director: ${movie.director ?: "N/A"}",
+            text = "Director: ${movie.director}",
             color = Color.LightGray,
             fontSize = 14.sp
         )
         Text(
-            text = "Actors: ${movie.actors ?: "N/A"}",
+            text = "Actors: ${movie.actors}",
             color = Color.LightGray,
             fontSize = 14.sp
         )
