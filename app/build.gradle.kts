@@ -48,6 +48,28 @@ android {
 }
 
 dependencies {
+
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+    testImplementation ("junit:junit:4.13.2")
+    implementation(libs.junit.junit)
+    // JUnit for unit testing
+    testImplementation ("junit:junit:4.13.2")
+
+// Kotlin Coroutines for testing
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
+
+// AndroidX Core Testing (для LiveData и ViewModel тестов)
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+
+// AndroidX Test
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+
+    testImplementation ("org.mockito:mockito-core:3.11.2")
+    androidTestImplementation ("org.mockito:mockito-android:3.11.2")
+
+
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.retrofit)

@@ -17,10 +17,16 @@ coilCompose = "2.7.0"
 converterGson = "2.11.0"
 hiltAndroidCompiler = "2.51.1"
 navigationRuntimeKtx = "2.8.0"
-navigationCompose = "2.8.0"
+navigationCompose = "2.8.3"
 testng = "6.9.6"
+junitJunit = "4.12"
+kotlinTest = "1.7.20"
+
 
 [libraries]
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
+
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-hilt-navigation-compose-v100 = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
